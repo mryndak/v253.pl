@@ -42,18 +42,18 @@
 \*********************************************************************************************/
 
 // -- Master parameter control --------------------
-#define CFG_HOLDER             4617              // [Reset 1] Change this value (max 32000) to load SECTION1 configuration parameters to flash
+#define CFG_HOLDER             10008              // [Reset 1] Change this value (max 32000) to load SECTION1 configuration parameters to flash
                                                  // If following define is disabled it increases configuration corruption detection BUT
                                                  //  it only allows firmware upgrades starting from version 6.6.0.11
 
 // -- Project -------------------------------------
-#define PROJECT                "tasmota"         // PROJECT is used as the default topic delimiter
+#define PROJECT                "v253.pl"         // PROJECT is used as the default topic delimiter
 
 // If not selected the default will be SONOFF_BASIC
-//#define MODULE                 SONOFF_BASIC      // [Module] Select default module from tasmota_template.h
+#define MODULE                 USER_MODULE      // [Module] Select default module from tasmota_template.h
 #ifdef ESP8266
-#define FALLBACK_MODULE        SONOFF_BASIC      // [Module2] Select default module on fast reboot where USER_MODULE is user template
-//#define USER_TEMPLATE "{\"NAME\":\"Generic\",\"GPIO\":[1,1,1,1,1,1,1,1,1,1,1,1,1,1],\"FLAG\":0,\"BASE\":18}"  // [Template] Set JSON template
+#define FALLBACK_MODULE        USER_MODULE      // [Module2] Select default module on fast reboot where USER_MODULE is user template
+#define USER_TEMPLATE "{\"NAME\":\"v253.pl\",\"GPIO\":[32,0,0,0,2720,2656,0,0,2624,320,224,0,0,0],\"FLAG\":0,\"BASE\":49}"  // [Template] Set JSON template
 #endif  // ESP8266
 #ifdef ESP32
 #define FALLBACK_MODULE        WEMOS             // [Module2] Select default module on fast reboot where USER_MODULE is user template
@@ -62,7 +62,7 @@
 
 #define SAVE_DATA              1                 // [SaveData] Save changed parameters to Flash (0 = disable, 1 - 3600 seconds)
 #define SAVE_STATE             true              // [SetOption0] Save changed power state to Flash (false = disable, true = enable)
-#define BOOT_LOOP_OFFSET       1                 // [SetOption36] Number of boot loops before starting restoring defaults (0 = disable, 1..200 = boot loops offset)
+#define BOOT_LOOP_OFFSET       0                 // [SetOption36] Number of boot loops before starting restoring defaults (0 = disable, 1..200 = boot loops offset)
 
 // -- Wi-Fi ---------------------------------------
 #define WIFI_IP_ADDRESS        "0.0.0.0"         // [IpAddress1] Set to 0.0.0.0 for using DHCP or enter a static IP address
@@ -147,7 +147,7 @@
 #define DOMOTICZ_UPDATE_TIMER  0                 // [DomoticzUpdateTimer] Send relay status (0 = disable, 1 - 3600 seconds)
 
 // -- MQTT - Home Assistant Discovery -------------
-#define HOME_ASSISTANT_DISCOVERY_ENABLE   false  // [SetOption19] Home Assistant Discovery (false = Disable, true = Enable)
+#define HOME_ASSISTANT_DISCOVERY_ENABLE   true  // [SetOption19] Home Assistant Discovery (false = Disable, true = Enable)
 #define HASS_AS_LIGHT          false             // [SetOption30] Enforce HAss autodiscovery as light
 //#define DEEPSLEEP_LWT_HA_DISCOVERY             // Enable LWT topic and its payloads for read-only sensors (Status sensor not included) and binary_sensors on HAss Discovery (Commented out: all read-only sensors and binary_sensors
                                                  // won't be shown as OFFLINE on Home Assistant when the device is DeepSleeping - NOTE: This is only for read-only sensors and binary_sensors, relays will be shown as OFFLINE)
@@ -166,14 +166,14 @@
 // -- HTTP ----------------------------------------
 #define WEB_SERVER             2                 // [WebServer] Web server (0 = Off, 1 = Start as User, 2 = Start as Admin)
 #define WEB_PASSWORD           ""                // [WebPassword] Web server Admin mode Password for WEB_USERNAME (empty string = Disable)
-#define FRIENDLY_NAME          "Tasmota"         // [FriendlyName] Friendlyname up to 32 characters used by webpages and Alexa
+#define FRIENDLY_NAME          "V253.PL - Gniazdko sterowane napięciem"            // [FriendlyName] Friendlyname up to 32 characters used by webpages and Alexa
 #define EMULATION              EMUL_NONE         // [Emulation] Select Belkin WeMo (single relay/light) or Hue Bridge emulation (multi relay/light) (EMUL_NONE, EMUL_WEMO or EMUL_HUE)
 #define EMULATION_HUE_1ST_GEN  false             // [Emulation] Force SetOption109 1 - if you only have Echo Dot 2nd gen devices
 //#define USE_CORS                                 // [Cors] Enable CORS - Be aware that this feature is unsecure ATM (https://github.com/arendst/Tasmota/issues/6767)
   #define CORS_DOMAIN            ""                // [Cors] CORS Domain for preflight requests
 
 // -- HTTP Options --------------------------------
-#define GUI_SHOW_HOSTNAME      false             // [SetOption53] Show hostname and IP address in GUI main menu
+#define GUI_SHOW_HOSTNAME      true             // [SetOption53] Show hostname and IP address in GUI main menu
 
 // -- HTTP GUI Colors -----------------------------
 // HTML hex color codes. Only 3 and 6 digit hex string values are supported!! See https://www.w3schools.com/colors/colors_hex.asp
@@ -253,18 +253,18 @@
 #define TIME_STD_OFFSET        +60               // Offset from UTC in minutes (-780 to +780)
 
 // -- Location ------------------------------------
-#define LATITUDE               48.858360         // [Latitude] Your location to be used with sunrise and sunset
-#define LONGITUDE              2.294442          // [Longitude] Your location to be used with sunrise and sunset
+#define LATITUDE               50.041187         // [Latitude] Your location to be used with sunrise and sunset
+#define LONGITUDE              21.999121         // [Longitude] Your location to be used with sunrise and sunset
 
 // -- Application ---------------------------------
-#define APP_TIMEZONE           1                 // [Timezone] +1 hour (Amsterdam) (-13 .. 14 = hours from UTC, 99 = use TIME_DST/TIME_STD)
+#define APP_TIMEZONE           99                // [Timezone] +1 hour (Amsterdam) (-13 .. 14 = hours from UTC, 99 = use TIME_DST/TIME_STD)
 #define APP_LEDSTATE           LED_POWER         // [LedState] Function of led
                                                  //   (LED_OFF, LED_POWER, LED_MQTTSUB, LED_POWER_MQTTSUB, LED_MQTTPUB, LED_POWER_MQTTPUB, LED_MQTT, LED_POWER_MQTT)
 #define APP_LEDMASK            0xFFFF            // [LedMask] Assign Relay to Power led (0xFFFF is default)
 #define APP_ENABLE_LEDLINK     false             // [SetOption31] Enable link led blinking
 
 #define APP_PULSETIME          0                 // [PulseTime] Time in 0.1 Sec to turn off power for relay 1 (0 = disabled)
-#define APP_POWERON_STATE      POWER_ALL_SAVED   // [PowerOnState] Power On Relay state
+#define APP_POWERON_STATE      POWER_ALL_OFF     // [PowerOnState] Power On Relay state
                                                  //   (POWER_ALL_OFF, POWER_ALL_ON, POWER_ALL_SAVED_TOGGLE, POWER_ALL_SAVED, POWER_ALL_ALWAYS_ON, POWER_ALL_OFF_PULSETIME_ON)
 #define APP_BLINKTIME          10                // [BlinkTime] Time in 0.1 Sec to blink/toggle power for relay 1
 #define APP_BLINKCOUNT         10                // [BlinkCount] Number of blinks (0 = 32000)
@@ -296,7 +296,7 @@
 
 #define APP_FLASH_CYCLE        false             // [SetOption12] Switch between dynamic or fixed slot flash save location
 #define APP_NO_RELAY_SCAN      false             // [SetOption63] Don't scan relay power state at restart
-#define APP_DISABLE_POWERCYCLE false             // [SetOption65] Disable fast power cycle detection for device reset
+#define APP_DISABLE_POWERCYCLE true              // [SetOption65] Disable fast power cycle detection for device reset
 #define DEEPSLEEP_BOOTCOUNT    false             // [SetOption76] Enable incrementing bootcount when deepsleep is enabled
 
 #define APP_INTERLOCK_MODE     false             // [Interlock] Relay interlock mode
@@ -323,12 +323,12 @@
 #define USE_AC_ZERO_CROSS_DIMMER                 // Requires USE_COUNTER and USE_LIGHT
 
 // -- Energy --------------------------------------
-#define ENERGY_VOLTAGE_ALWAYS  false             // [SetOption21] Enable show voltage even if powered off
+#define ENERGY_VOLTAGE_ALWAYS  true              // [SetOption21] Enable show voltage even if powered off
 #define ENERGY_DDS2382_MODE    false             // [SetOption71] Enable DDS2382 different Modbus registers for Active Energy (#6531)
-#define ENERGY_HARDWARE_TOTALS false             // [SetOption72] Enable hardware energy total counter as reference (#6561)
+#define ENERGY_HARDWARE_TOTALS true              // [SetOption72] Enable hardware energy total counter as reference (#6561)
 
 // -- Other Options -------------------------------
-#define TIMERS_ENABLED         false             // [Timers] Enable Timers
+#define TIMERS_ENABLED         true              // [Timers] Enable Timers
 #define RF_DATA_RADIX          false             // [SetOption28] RF receive data format (false = hexadecimal, true = decimal)
 #define IR_DATA_RADIX          false             // [SetOption29] IR receive data format (false = hexadecimal, true = decimal)
 #define TUYA_SETOPTION_20      false             // [SetOption54] Apply SetOption20 settings to Tuya device
@@ -372,7 +372,7 @@
 //#define MY_LANGUAGE            it_IT           // Italian in Italy
 //#define MY_LANGUAGE            ko_KO           // Korean in Korea
 //#define MY_LANGUAGE            nl_NL           // Dutch in the Nederland
-//#define MY_LANGUAGE            pl_PL           // Polish in Poland
+#define MY_LANGUAGE            pl_PL             // Polish in Poland
 //#define MY_LANGUAGE            pt_BR           // Portuguese in Brazil
 //#define MY_LANGUAGE            pt_PT           // Portuguese in Portugal
 //#define MY_LANGUAGE            ro_RO           // Romanian in Romania
@@ -494,9 +494,9 @@
 // -- Rules or Script  ----------------------------
 // Select none or only one of the below defines USE_RULES or USE_SCRIPT
 #define USE_RULES                                // Add support for rules (+8k code)
-//  #define USE_EXPRESSION                         // Add support for expression evaluation in rules (+3k2 code, +64 bytes mem)
-//    #define SUPPORT_IF_STATEMENT                 // Add support for IF statement in rules (+4k2 code, -332 bytes mem)
-//  #define USER_RULE1 "<Any rule1 data>"          // Add rule1 data saved at initial firmware load or when command reset is executed
+#define USE_EXPRESSION                         // Add support for expression evaluation in rules (+3k2 code, +64 bytes mem)
+    #define SUPPORT_IF_STATEMENT                 // Add support for IF statement in rules (+4k2 code, -332 bytes mem)
+#define USER_RULE1 "ON system#boot DO var1 0 ENDON ON energy#voltage>251.5 DO Backlog var1 1; Power ON ENDON ON power1#state=1 DO if(var1==1) ruletimer1 180; var1 0 endif ENDON ON rules#timer=1 DO Backlog var1 0;power off ENDON"          // Add rule1 data saved at initial firmware load or when command reset is executed
 //  #define USER_RULE2 "<Any rule2 data>"          // Add rule2 data saved at initial firmware load or when command reset is executed
 //  #define USER_RULE3 "<Any rule3 data>"          // Add rule3 data saved at initial firmware load or when command reset is executed
 
@@ -504,7 +504,7 @@
 //  #define USE_SCRIPT_FATFS 4                     // Script: Add FAT FileSystem Support
 //  #define SUPPORT_MQTT_EVENT                     // Support trigger event with MQTT subscriptions (+3k5 code)
 
-//#define USER_BACKLOG "<Any command separated by a semicolon (;)>"  // Add commands executed at firmware load or when command reset is executed
+#define USER_BACKLOG "Rule1 1;VoltRes 1"  // Add commands executed at firmware load or when command reset is executed
 
 // -- Optional modules ----------------------------
 #define ROTARY_V1                                // Add support for Rotary Encoder as used in MI Desk Lamp (+0k8 code)

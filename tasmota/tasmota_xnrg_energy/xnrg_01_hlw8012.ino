@@ -34,7 +34,7 @@
 
 // Energy model type 1 (GPIO_HJL_CF) - HJL-01/BL0937 based (BlitzWolf, Homecube, Gosund, Teckin)
 #define HJL_PREF             1362
-#define HJL_UREF              822
+#define HJL_UREF              637
 #define HJL_IREF             3300
 
 #define HLW_POWER_PROBE_TIME   10    // Number of seconds to probe for power before deciding none used (low power pulse can take up to 10 seconds)
